@@ -1,4 +1,4 @@
-import { IActivity } from "./../models/activities";
+import { IActivity } from "../models/activity";
 import axios, { AxiosResponse } from "axios";
 import { resolve } from "dns";
 
