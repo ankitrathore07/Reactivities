@@ -7,26 +7,41 @@ import { RouteComponentProps } from "react-router-dom";
 import LoadingComponent from "../../app/layout/LoadingComponent";
 import { observer } from "mobx-react-lite";
 
-interface RouteParams{
-    username: string
+interface RouteParams {
+  username: string;
 }
 
-interface IProps extends RouteComponentProps<RouteParams>{}
+interface IProps extends RouteComponentProps<RouteParams> {}
 
-const ProfilePage: React.FC<IProps> = ({match}) => {
-    const rootStore = useContext(RootStoreContext);
-    const {loadingProfile, profile, loadProfile} = rootStore.profileStore;
+const ProfilePage: React.FC<IProps> = ({ match }) => {
+  const rootStore = useContext(RootStoreContext);
+  const {
+    loadingProfile,
+    profile,
+    loadProfile,
+    follow,
+    unFollow,
+    isCurrentUser,
+    loading,
+    setActiveTab
+  } = rootStore.profileStore;
 
-    useEffect(() => {
-        loadProfile(match.params.username)
-    }, [loadProfile, match])
+  useEffect(() => {
+    loadProfile(match.params.username);
+  }, [loadProfile, match]);
 
-    if(loadingProfile) return <LoadingComponent content='Loading profile...' />
+  if (loadingProfile) return <LoadingComponent content="Loading profile..." />;
   return (
     <Grid>
       <Grid.Column width={16}>
-        <ProfileHeader profile={profile!} />
-        <ProfileContent />
+        <ProfileHeader
+          profile={profile!}
+          follow={follow}
+          unFollow={unFollow}
+          isCurrentUser={isCurrentUser}
+          loading={loading}          
+        />
+        <ProfileContent setActiveTab={setActiveTab} />
       </Grid.Column>
     </Grid>
   );
