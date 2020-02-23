@@ -1,3 +1,4 @@
+import { category } from './../common/options/categoryOptions';
 export interface IProfile {
   username: string;
   displayName: string;
@@ -14,3 +15,11 @@ export interface IPhoto {
   url: string;
   isMain: boolean;
 }
+
+export interface IUserActivity{
+  id: string;
+  title: string;
+  category: string;
+  date: Date;
+}
+

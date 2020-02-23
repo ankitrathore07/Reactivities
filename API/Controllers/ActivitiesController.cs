@@ -8,14 +8,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
-{   
+{
     public class ActivitiesController : BaseController
-    {      
+    {
 
         [HttpGet]
-        public async Task<ActionResult<List<ActivityDto>>> List()
+        public async Task<ActionResult<List.ActivitiesEnvelop>> List(int? limit, 
+            int? offset, bool isGoing, bool isHost, DateTime? startDate)
         {
-            return await Mediator.Send(new List.Query());
+            return await Mediator.Send(new List.Query(limit,
+             offset, isGoing, isHost, startDate));
         }
 
         [HttpGet("{id}")]
@@ -47,13 +49,15 @@ namespace API.Controllers
         }
 
         [HttpPost("{id}/attend")]
-        public async Task<ActionResult<Unit>> Atttend(Guid id){
-            return await Mediator.Send(new Attend.Command{Id = id});
+        public async Task<ActionResult<Unit>> Atttend(Guid id)
+        {
+            return await Mediator.Send(new Attend.Command { Id = id });
         }
 
         [HttpDelete("{id}/attend")]
-        public async Task<ActionResult<Unit>> Unattend(Guid id){
-            return await Mediator.Send(new Unattend.Command{Id = id});
+        public async Task<ActionResult<Unit>> Unattend(Guid id)
+        {
+            return await Mediator.Send(new Unattend.Command { Id = id });
         }
     }
 }

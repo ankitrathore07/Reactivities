@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Segment, Form, Button } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../app/common/form/TextInput";
 import TextAreaInput from "../../app/common/form/TextAreaInput";
